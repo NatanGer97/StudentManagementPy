@@ -27,6 +27,21 @@ class StudentDto(BaseModel):
         orm_mode = True
 
 
+class StudentGradeDao(BaseModel):
+    course_name: str
+    course_score: int
+
+class StudentGradeDto(BaseModel):
+    id: int
+    created_at: datetime.date
+    student_id: int
+    course_name: str
+    course_score: int
+
+    class Config:
+        orm_mode = True
+
+
 class ResponseWithStatus(BaseModel):
     message: str
     status: str

@@ -18,3 +18,14 @@ class Student(Base):
 
     def __repr__(self):
         return f"Student(id={self.id}, fullname={self.fullname}, email={self.email})"
+
+class StudentGrade(Base):
+    __tablename__ = 'student_grade'
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    created_at = Column(DateTime, nullable=False)
+    student_id = Column(Integer, nullable=False)
+    course_name = Column(String(100), unique=False, nullable=False)
+    course_score = Column(Integer, nullable=True)
+
+    def __repr__(self):
+        return f"StudentGrade(id={self.id}, student_id={self.student_id}, course_name={self.course_name}, course_score={self.course_score})"

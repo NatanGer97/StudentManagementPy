@@ -1,4 +1,5 @@
 import datetime
+from typing import List
 
 from pydantic import BaseModel
 from sqlalchemy import DateTime
@@ -54,3 +55,28 @@ class ResponseWithStatus(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+
+class EmailDao(BaseModel):
+    recipient: str
+    subject: str
+    content: str
+
+    class Config:
+        orm_mode = True
+
+class EmailBody(BaseModel):
+    title: str
+    content: str
+    btn_text: str
+    btn_url: str
+
+    class Config:
+        orm_mode = True
+
+
+
+
+
+

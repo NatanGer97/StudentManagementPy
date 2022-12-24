@@ -5,8 +5,11 @@ from sqlalchemy import DateTime
 
 
 class StudentDao(BaseModel):
-    fullname: str
-    birthdate: datetime.datetime
+    # fullname: str
+    first_name: str
+    last_name: str
+    birthdate: datetime.date
+    # birthdate: datetime.datetime
     sat_score: int
     graduation_score: float
     email: str
@@ -16,8 +19,11 @@ class StudentDao(BaseModel):
 class StudentDto(BaseModel):
     id: int
     created_at: datetime.datetime
-    fullname: str
-    birthdate: datetime.datetime
+    # fullname: str
+    first_name: str
+    last_name: str
+    birthdate: datetime.date
+    # birthdate: datetime.datetime
     sat_score: int
     graduation_score: float
     email: str

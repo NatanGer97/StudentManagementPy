@@ -8,8 +8,10 @@ class Student(Base):
     __tablename__ = 'students'
     id = Column(Integer, primary_key=True, index=True)
     created_at = Column(DateTime, nullable=False)
-    fullname = Column(String(100), unique=False, nullable=False)
-    birthdate = Column(DateTime, nullable=True)
+    # fullname = Column(String(100), unique=False, nullable=False)
+    first_name = Column(String(100), unique=False, nullable=False)
+    last_name = Column(String(100), unique=False, nullable=False)
+    birthdate = Column(sqlalchemy.Date, nullable=True)
     sat_score = Column(Integer, nullable=True)
     graduation_score = Column(sqlalchemy.Float, nullable=True)
     email = Column(String(255), unique=False, nullable=True)

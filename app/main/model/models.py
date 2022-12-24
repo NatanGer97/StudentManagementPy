@@ -31,3 +31,14 @@ class StudentGrade(Base):
 
     def __repr__(self):
         return f"StudentGrade(id={self.id}, student_id={self.student_id}, course_name={self.course_name}, course_score={self.course_score})"
+
+class User(Base):
+    __tablename__ = 'users'
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String(255), unique=True, nullable=False)
+    hashed_password = Column(String(255), nullable=False)
+    is_active = Column(sqlalchemy.Boolean, default=True)
+    username = Column(String(255), unique=True, nullable=False)
+
+    def __repr__(self):
+        return f"User(id={self.id}, email={self.email}, is_active={self.is_active})"

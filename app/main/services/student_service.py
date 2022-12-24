@@ -4,6 +4,7 @@ from fastapi import HTTPException
 
 from sqlalchemy.orm import Session
 
+from app.main.services.aws_service import upload_file, create_presigned_url
 from app.main.util.fps import get_paginated
 from app.main.model.models import Student
 import app.main.model.models as models
@@ -39,7 +40,6 @@ def save_new_student(db: Session, req: StudentDao):
     else:
         raise HTTPException(status_code=400,
                             detail="Student with given email already exists.")
-
 
 
 def update_student(db: Session, id: int, req: StudentDao):
@@ -120,8 +120,39 @@ def get_all_students(first_name, last_name, sat_score_from, sat_score_to, birthd
                          count=count)
 
 
+def upload_picture(db: Session, student_id: int, picture):
+    student = get_a_student(db,
+                            student_id)
+
+    if student:
+        student.picture = "apps/python/student-" + str(student_id) + ".png"
+        upload_file(picture,
+                    student.picture)
+        db.commit()
+
+        return {'message': 'Student picture uploaded successfully', "status": "success"}
+
+    else:
+        response_object = {
+            'status': 'fail',
+            'message': 'Student does not exist. ',
+        }
+        return response_object
+
+
 def get_a_student(db: Session, id: int):
-    return db.query(Student).filter(models.Student.id == id).first()
+    student = db.query(Student).filter(models.Student.id == id).first()
+    logging.info(student.picture)
+    if student.picture:
+        student.picture = create_presigned_url(student.picture)
+        return student
+    # if student:
+    #     if student.picture is not None:
+    #         student.picture = create_presigned_url(student.picture)
+    #     return student
+    else:
+        raise HTTPException(status_code=404,
+                            detail="Student not found")
 
 
 def delete_a_student(db: Session, id: int):

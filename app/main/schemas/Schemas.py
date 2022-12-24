@@ -20,15 +20,14 @@ class StudentDao(BaseModel):
 class StudentDto(BaseModel):
     id: int
     created_at: datetime.datetime
-    # fullname: str
     first_name: str
     last_name: str
     birthdate: datetime.date
-    # birthdate: datetime.datetime
     sat_score: int
     graduation_score: float
     email: str
     phone: str
+    picture: str
 
     class Config:
         orm_mode = True

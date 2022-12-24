@@ -1,6 +1,6 @@
 import logging
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, UploadFile
 from sqlalchemy.orm import Session
 
 import app.main.schemas.Schemas
@@ -68,3 +68,13 @@ def update_student(id: int, req: schemas.StudentDao, db: Session = Depends(get_d
 def delete_student(id: int, db: Session = Depends(get_db)):
     return student_service.delete_a_student(db,
                                             id)
+
+
+@router.post("/{studentId}/uploadFile")
+async def upload_file(studentId: int, uploaded_file: UploadFile, db: Session = Depends(get_db)):
+    if not uploaded_file:
+        return {"error": "No file provided"}
+    else:
+        return student_service.upload_picture(db,
+                                              studentId,
+                                              uploaded_file.file)

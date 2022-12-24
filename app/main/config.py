@@ -7,3 +7,6 @@ import os
 class Config:
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@postgres:5432/postgres'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
+    AWS_ACCESSKEY  = 'AKIAVXZXAG3GYFRSL733'
+    AWS_SECRETKEY = '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'
+    BUCKET_URL = 'files.backend.projects'

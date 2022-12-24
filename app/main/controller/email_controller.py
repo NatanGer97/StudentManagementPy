@@ -4,11 +4,12 @@ from sqlalchemy.orm import Session
 
 from app.main.database import get_db
 from app.main.model.models import Student
-from app.main.services import email_service
+from app.main.services import email_service, auth_service
 from app.main.schemas import Schemas as schemas
 
 router = APIRouter(prefix="/email",
-                   tags=["email"])
+                   tags=["email"],
+                   dependencies=[Depends(auth_service.get_current_user)])
 
 
 @router.post('/send-email/asynchronous')

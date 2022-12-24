@@ -3,9 +3,10 @@ from sqlalchemy.orm import Session
 
 import app.main.schemas.Schemas as schemas
 from app.main.database import get_db
-from app.main.services import student_grade_service
+from app.main.services import student_grade_service, auth_service
 
-router = APIRouter(prefix="/grades", tags=["grades"])
+router = APIRouter(prefix="/grades", tags=["grades"],
+                   dependencies=[Depends(auth_service.get_current_user)])
 
 @router.get("/{student_id}/grade",  status_code=200)
 def get_student_grade(student_id: int, db: Session = Depends(get_db)):

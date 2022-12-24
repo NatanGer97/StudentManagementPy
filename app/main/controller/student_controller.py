@@ -9,7 +9,8 @@ from app.main.services import student_service, auth_service
 from app.main.schemas import Schemas as schemas
 
 router = APIRouter(prefix="/student",
-                   tags=["student"])
+                   tags=["student"],
+                   dependencies=[Depends(auth_service.get_current_user)])
 
 
 @router.get("/")

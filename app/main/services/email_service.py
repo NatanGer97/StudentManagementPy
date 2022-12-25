@@ -11,29 +11,26 @@ load_dotenv('.env')
 
 
 class EmailConfig:
-    # MAIL_USERNAME = "nathan.projects97@gmail.com"
     MAIL_USERNAME = os.getenv('MAIL_USERNAME')
-    # MAIL_PASSWORD = "mbzwqiclkgfesnvy"
     MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
     MAIL_FROM = os.getenv('MAIL_FROM')
-    # MAIL_PORT = 587
     MAIL_PORT = (os.getenv('MAIL_PORT'))
-    # MAIL_SERVER = "smtp.gmail.com"
     MAIL_SERVER = os.getenv('MAIL_SERVER')
     MAIL_FROM_NAME = "Admin"
 
 
 conf = ConnectionConfig(
     MAIL_USERNAME=EmailConfig.MAIL_USERNAME,
-    # MAIL_USERNAME="nathan.projects97@gmail.com",
     MAIL_PASSWORD=EmailConfig.MAIL_PASSWORD,
-    # MAIL_PASSWORD="mbzwqiclkgfesnvy",
-    # MAIL_FROM=EmailConfig.MAIL_FROM,
-    # MAIL_FROM="admin@fatapi.com",
+    MAIL_FROM=EmailConfig.MAIL_FROM,
     MAIL_PORT=EmailConfig.MAIL_PORT,
+    # MAIL_PORT=465 in production
+    # MAIL_PORT=587,
     MAIL_SERVER=EmailConfig.MAIL_SERVER,
     MAIL_FROM_NAME=EmailConfig.MAIL_FROM_NAME,
+    # in production, comment this line
     MAIL_STARTTLS=True,
+    # in production, comment this line
     MAIL_SSL_TLS=False,
     USE_CREDENTIALS=True,
     VALIDATE_CERTS=True,

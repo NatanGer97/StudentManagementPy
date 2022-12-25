@@ -3,8 +3,8 @@ services:
   appserver:
     container_name: python-app-server
     hostname: localhost
-    #    image: natanger97/student_management-py:004
-    image: basic_python
+    image: natanger97/student_management-py:005
+#    image: basic_python
     ports:
       - "5000:5000"
     depends_on:

@@ -27,7 +27,7 @@ class StudentDto(BaseModel):
     graduation_score: float
     email: str
     phone: str
-    picture: str
+    picture: str | None
 
     class Config:
         orm_mode = True

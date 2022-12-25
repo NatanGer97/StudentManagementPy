@@ -53,3 +53,12 @@ def send_email_to_all(background_tasks: BackgroundTasks, subject: str, content: 
                                     body)
 
     return {'message': 'Email sent successfully'}
+
+@router.post('/to-all/microservice')
+def send_email_to_all_microservice(req: schemas.EmailRequest, db: Session = Depends(get_db)):
+    recipients = [(student.email, student.first_name) for student in db.query(Student).all()]
+    email_service.send_email_to_all_microservice(req, recipients)
+
+
+
+    return {'message': 'Email sent successfully'}

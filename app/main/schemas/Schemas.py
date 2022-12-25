@@ -1,5 +1,5 @@
 import datetime
-from typing import List
+from typing import List, Tuple
 
 from pydantic import BaseModel
 from sqlalchemy import DateTime
@@ -37,6 +37,7 @@ class StudentGradeDao(BaseModel):
     course_name: str
     course_score: int
 
+
 class StudentGradeDto(BaseModel):
     id: int
     created_at: datetime.date
@@ -56,7 +57,6 @@ class ResponseWithStatus(BaseModel):
         orm_mode = True
 
 
-
 class EmailDao(BaseModel):
     recipient: str
     subject: str
@@ -64,6 +64,27 @@ class EmailDao(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class EmailRequest(BaseModel):
+    subject: str
+    content: str
+
+    class Config:
+        orm_mode = True
+
+
+class EmailRequestMicroService(BaseModel):
+    subject: str
+    content: str
+    recipients: List[Tuple[str, str]]
+
+    def __repr__(self):
+        return f"EmailRequestMicroService(subject={self.subject}, content={self.content}, recipients={self.recipients})"
+
+    class Config:
+        orm_mode = True
+
 
 class EmailBody(BaseModel):
     title: str
@@ -74,28 +95,25 @@ class EmailBody(BaseModel):
     class Config:
         orm_mode = True
 
+
 class Token(BaseModel):
     access_token: str
     token_type: str
 
+
 class TokenData(BaseModel):
     username: str | None = None
+
 
 class User(BaseModel):
     username: str
     email: str
     disabled: bool = None
 
+
 class UserIn(User):
     password: str
 
+
 class UserInDB(User):
     hashed_password: str
-
-
-
-
-
-
-
-

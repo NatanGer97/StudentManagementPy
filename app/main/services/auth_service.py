@@ -1,7 +1,7 @@
 from datetime import timedelta, datetime
 
 from fastapi import HTTPException, Depends, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordBearer, OAuth2AuthorizationCodeBearer
 from jose import jwt, JWTError
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
@@ -17,6 +17,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 pwd_context = CryptContext(schemes=["bcrypt"],
                            deprecated="auto")
+
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
 

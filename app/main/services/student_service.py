@@ -142,9 +142,11 @@ def upload_picture(db: Session, student_id: int, picture):
 
 def get_a_student(db: Session, id: int):
     student = db.query(Student).filter(models.Student.id == id).first()
-    logging.info(student.picture)
+
     if student.picture:
         student.picture = create_presigned_url(student.picture)
+        return student
+    elif student:
         return student
     # if student:
     #     if student.picture is not None:

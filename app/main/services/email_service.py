@@ -141,14 +141,17 @@ def send_email_to_all(background_tasks: BackgroundTasks, recipients: list, subje
 
               """
 
-        message = MessageSchema(
-            subject=subject,
-            recipients=[recipient[0]],
-            body=html,
-            subtype='html',
-        )
+        try:
+            message = MessageSchema(
+                subject=subject,
+                recipients=[recipient[0]],
+                body=html,
+                subtype='html',
+            )
 
-        fm = FastMail(conf)
-        background_tasks.add_task(
-            fm.send_message,
-            message);
+            fm = FastMail(conf)
+            background_tasks.add_task(
+                fm.send_message,
+                message)
+        except Exception as e:
+            print(e)
